@@ -1,5 +1,6 @@
 #include "BinarySearchTree.h"
 
+
 /*CONSTRUCTOR*/
 BinarySearchTree::BinarySearchTree()
 {
@@ -33,6 +34,7 @@ void BinarySearchTree::insert(int input)
 	}
 }
 
+
 //private
 void BinarySearchTree::insert(Node * toAdd, Node * addHere)
 {
@@ -60,6 +62,33 @@ void BinarySearchTree::insert(Node * toAdd, Node * addHere)
 }
 
 
+//public and private display methods
+void BinarySearchTree::display()
+{
+	if (isEmpty()) {
+		cout << "BTree is empty";
+	}
+	else {
+		cout << root->city;
+		if (root->left != NULL)
+			display(root->left);
+
+		if (root->right != NULL)
+			display(root->right);
+	}
+}
+
+void BinarySearchTree::display(Node * nodeptr)
+{
+	cout << nodeptr->city;
+	if (nodeptr->left != NULL) 
+		display(nodeptr->left);
+	if (nodeptr->right != NULL)
+		display(nodeptr->right);
+}
+
+
+
 /*
 void BinarySearchTree::delCity(City)
 {
@@ -82,9 +111,7 @@ Node * BinarySearchTree::searchCoord(int, int)
 	return nullptr;
 }
 
-void BinarySearchTree::display()
-{
-}
+
 
 void BinarySearchTree::displayInDist(City, double)
 {

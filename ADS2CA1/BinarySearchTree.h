@@ -1,8 +1,10 @@
 #ifndef BINARY_SEARCH_TREE_H
 #define BINARY_SEARCH_TREE_H
+
+#include<iostream>
 #include"Node.h"
 #include"City.h"
-
+using namespace std;
 class BinarySearchTree {
 public:
 	BinarySearchTree(); //default constructor 
@@ -18,6 +20,7 @@ public:
 	void display(); //prints the whole tree to the console
 	void displayInDist(City, double); //displays cities within distance from city input
 private:
+	void display(Node * nodeptr);
 	void insert(Node *toAdd, Node *addHere);
 	Node * root;
 };
