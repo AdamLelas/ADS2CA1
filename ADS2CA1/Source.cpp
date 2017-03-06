@@ -9,25 +9,22 @@ using namespace std;
 int main() {
 
 	BinarySearchTree citytree;
+
+	citytree.insert("Dublin", 25, 66);
+	citytree.insert("Edinburgh", 120 , 98);
+	citytree.insert("Moscow",12 ,33 );
+	citytree.insert("Venice", 90 ,54 );
+	citytree.insert("Atlanta",60 ,38 );
+
+	cout << "SEARCH NAME HAPPENING NOW" <<endl;
+	cout << citytree.searchName("Dublin");
+	cout << "\n\n\n";
+
+
+
+
 	
-	citytree.insert(7);
-	citytree.insert(2);
-	citytree.insert(5);
-	citytree.insert(9);
-	citytree.insert(4);
-	citytree.insert(6);
-	citytree.insert(8);
-
-	//citytree.insert(5);
-	//citytree.insert(3);
-	//citytree.insert(2);
-	//citytree.insert(4);
-	//citytree.insert(1);
-
-	//citytree.insert(8);
-	//citytree.insert(6);
-	//citytree.insert(7);
-	//citytree.insert(9);
+	
 
 	citytree.display();
 

@@ -5,10 +5,9 @@
 struct Node {
 
 	bool isLeaf(); //returns true if the node is a leaf node, otherwise returns false
-	Node() { city = NULL; left = NULL; right = NULL; };
-
-	//City c;
-	int city;
+	Node() { city = City(); left = NULL; right = NULL; };
+	int test;
+	City city;
 	Node * left;
 	Node * right;
 };

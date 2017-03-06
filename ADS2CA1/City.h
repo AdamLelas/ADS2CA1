@@ -12,7 +12,10 @@ public:
 	friend ostream& operator<<(ostream & out, const City& c);
 	bool operator<(const City& city2) const;
 	City(); //default constructor
-	City(int longtitude, int latitude, string nameIn);
+	City(string nameIn, double longitude, double latitude);
+	string getName();
+	double getLon();
+	double getLat();
 private:
 	pair<double, double> GPS;
 	string name;

@@ -11,8 +11,7 @@ public:
 	bool isEmpty();
 	int height(); //returns the height of the tree
 
-	/*======CURRENTLY AN INT CHANGE TO CITY/STRING======*/
-	void insert(int); //insert a new node
+	void insert(string, double, double); //insert a new node -------- creates instance of city 
 
 	void delCity(string); //delete a node by city name
 	Node* searchName(string); //search a city by name
@@ -20,8 +19,10 @@ public:
 	void display(); //prints the whole tree to the console
 	void displayInDist(City, double); //displays cities within distance from city input
 private:
-	void display(Node * nodeptr);
-	void insert(Node *toAdd, Node *addHere);
+	Node* searchName(string, Node*);
+	Node* searchCoord(int, int, Node*);
+	void display(Node * nodeptr); //display function for recursion
+	void insert(Node *toAdd, Node *addHere); //insert function for recursion
 	Node * root;
 };
 

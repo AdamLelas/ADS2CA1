@@ -5,10 +5,10 @@ ostream& operator<<(ostream& out, const City& c)
 	out << c.name << "\t" << c.GPS.first << "," << c.GPS.second;
 	return out;
 }
-  
+
 bool City::operator<(const City & city2) const
 {
-	
+	return (name < city2.name);
 }
 
 City::City()
@@ -18,12 +18,27 @@ City::City()
 	GPS.second = 0;
 }
 
-City::City(int longtitude, int latitude, string nameIn)
+City::City(string nameIn, double longitude, double latitude)
 {
-	//GPS = make_pair(longtitude, latitude);
+	//GPS = make_pair(longitude, latitude);
 	name = nameIn;
-	GPS.first = longtitude;
+	GPS.first = longitude;
 	GPS.second = latitude;
+}
+
+string City::getName()
+{
+	return name;
+}
+
+double City::getLon()
+{
+	return GPS.first;
+}
+
+double City::getLat()
+{
+	return GPS.second;
 }
 
 

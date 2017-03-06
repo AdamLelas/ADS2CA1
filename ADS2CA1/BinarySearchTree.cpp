@@ -16,26 +16,32 @@ bool BinarySearchTree::isEmpty()
 }
 
 
-void BinarySearchTree::insert(int input)
+//void BinarySearchTree::insert(int input)
+void BinarySearchTree::insert(string name, double longitude, double latitude)
 {
 	Node *temp = new Node;
-	temp->city = input;
+	temp->city = City(name, longitude, latitude);
 	temp->left = NULL;
 	temp->right = NULL;
 	if (!isEmpty()) {
+		//calls private insert function
 		insert(temp, root);
 	}
 	else
 	{
-		root = new Node;
-		root->city = input;
-		root->left = NULL;
-		root->right = NULL;
+		root = temp;
+		//root->city = input;
+		//root->left = NULL;
+		//root->right = NULL;
 	}
 }
 
-
-//private
+/**
+* private fucntion
+* "toAdd" is the node being added 
+* "addHere" is the node where it will be added or if addHere
+* already has a value then it is used in the recursive function call
+*/
 void BinarySearchTree::insert(Node * toAdd, Node * addHere)
 {
 	if (toAdd->city < addHere->city) 
@@ -58,11 +64,10 @@ void BinarySearchTree::insert(Node * toAdd, Node * addHere)
 			addHere->right = toAdd;
 		}
 	}
-
 }
 
 
-//public and private display methods
+//public and private display functions
 void BinarySearchTree::display()
 {
 	if (isEmpty()) {
@@ -103,29 +108,58 @@ void BinarySearchTree::delCity(City)
 }
 */
 
-
-
 void BinarySearchTree::delCity(string)
 {
+
 }
 
-Node * BinarySearchTree::searchName(string)
+
+//This function exists just to set off the recursive function without the user needing access to root
+Node * BinarySearchTree::searchName(string searchKey) {
+		return searchName(searchKey, root);				
+}
+
+//traverses the BTree until it finds the searchKey or not
+Node * BinarySearchTree::searchName(string searchKey, Node * passedNode)
 {
-	return nullptr;
+	if (passedNode != NULL) 
+	{
+		if (searchKey == passedNode->city.getName()) 
+		{
+			return passedNode;
+		}
+		if (searchKey < passedNode->city.getName())
+		{
+			return searchName(searchKey, passedNode->left);
+		}
+		else
+		{
+			return searchName(searchKey, passedNode->right);
+		}
+	}
+	else
+	{
+		return NULL;
+	}
+	
 }
 
-Node * BinarySearchTree::searchCoord(int, int)
+//This function exists just to set off the recursive function without the user needing access to root
+Node * BinarySearchTree::searchCoord(int lon, int lat)
 {
-	return nullptr;
+	return searchCoord(lon, lat, root);	
 }
 
-
+Node * BinarySearchTree::searchCoord(int lon, int lat, Node * passedNode)
+{
+	if (passedNode != NULL) {
+		if(passedNode->city.getLon() ==)
+	}
+}
 
 void BinarySearchTree::displayInDist(City, double)
 {
 }
-
-
 
 int BinarySearchTree::height()
 {
