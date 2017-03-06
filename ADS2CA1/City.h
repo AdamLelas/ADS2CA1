@@ -3,16 +3,18 @@
 
 #include<string>
 #include<ostream>
+#include"DistanceCalc.h"
 using namespace std;
 
 
 class City {
 public:
 	friend ostream& operator<<(ostream & out, const City& c);
+	bool operator<(const City& city2) const;
 	City(); //default constructor
-	City(int longtitude, int latitude, string n);
+	City(int longtitude, int latitude, string nameIn);
 private:
-	pair<int, int> GPS;
+	pair<double, double> GPS;
 	string name;
 };
 

@@ -70,21 +70,29 @@ void BinarySearchTree::display()
 	}
 	else {
 		cout << root->city;
-		if (root->left != NULL)
+		if (root->left != NULL) {
+			cout << "Left" << endl;
 			display(root->left);
-
-		if (root->right != NULL)
+		}
+		if (root->right != NULL) {
+			cout << "right" << endl;
 			display(root->right);
+		}
 	}
 }
 
 void BinarySearchTree::display(Node * nodeptr)
 {
 	cout << nodeptr->city;
-	if (nodeptr->left != NULL) 
+	if (nodeptr->left != NULL) {
+		cout << "Left" << endl;
 		display(nodeptr->left);
+	}
 	if (nodeptr->right != NULL)
+	{
+		cout << "right" << endl;
 		display(nodeptr->right);
+	}
 }
 
 
@@ -124,47 +132,3 @@ int BinarySearchTree::height()
 	return 0;
 }
 
-
-
-
-//iterative insert
-//void BinarySearchTree::insert(int input)
-//{
-//	Node *t = new Node; //create a temp node
-//
-//	/*fill temp_node with values*/
-//	t->city = input;
-//	t->left = NULL;
-//	t->right = NULL;
-//
-//	Node *parent;
-//	parent = NULL;
-//	
-//	if (isEmpty()) {
-//		root = t;
-//	}
-//	else 
-//	{
-//		Node *curr;
-//		curr = root;
-//		while (curr) 
-//		{
-//			parent = curr;
-//			if (t->city > curr->city)
-//			{
-//				curr = curr->right;
-//			}
-//			else
-//			{
-//				curr = curr->left;
-//			}
-//		} //end while
-//		if (t->city < parent->city)
-//		{
-//			parent->left = t;
-//		}
-//		else {
-//			parent->right = t;
-//		}
-//	}
-//}
