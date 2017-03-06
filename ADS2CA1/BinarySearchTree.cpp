@@ -108,9 +108,45 @@ void BinarySearchTree::delCity(City)
 }
 */
 
-void BinarySearchTree::delCity(string)
+void BinarySearchTree::delCity(string n)
 {
+	/*Temp is a pointer to the node to be deleted*/
+	Node *temp = searchName(n);
+	Node *leaf = new Node;
+	if (temp->left == NULL && temp->right == NULL) {
+		delete(temp);
+	}
+	else
+	{
+		if (temp->right != NULL) 
+		{
+			leaf = replacementNode(temp->right);
+		}
+		else {
+			if (temp->left != NULL) {
+				leaf = replacementNode(temp->left);
+			}
+		}
+	}
+}
 
+Node* BinarySearchTree::replacementNode(Node * passedNode) {
+	if (passedNode->isLeaf()) {
+		return passedNode;
+	}
+	else
+	{
+		if (passedNode->right != NULL) 
+		{
+			return replacementNode(passedNode->right);
+		}
+		else
+		{
+			if (passedNode->left != NULL) {
+				return replacementNode(passedNode->left);
+			}
+		}
+	}
 }
 
 
@@ -153,7 +189,21 @@ Node * BinarySearchTree::searchCoord(int lon, int lat)
 Node * BinarySearchTree::searchCoord(int lon, int lat, Node * passedNode)
 {
 	if (passedNode != NULL) {
-		if(passedNode->city.getLon() ==)
+		if ((passedNode->city.getLon() == lon) && passedNode->city.getLat() == lat)
+		{
+			return passedNode;
+		}
+		else
+		{
+			if (passedNode->left != NULL) 
+			{
+				return searchCoord(lon, lat, passedNode->left);
+			}
+			if (passedNode->right != NULL) 
+			{
+				return searchCoord(lon, lat, passedNode->right);
+			}
+		}
 	}
 }
 
