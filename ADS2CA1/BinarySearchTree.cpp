@@ -15,8 +15,6 @@ bool BinarySearchTree::isEmpty()
 		return false;
 }
 
-
-//void BinarySearchTree::insert(int input)
 void BinarySearchTree::insert(string name, double longitude, double latitude)
 {
 	Node *temp = new Node;
@@ -30,9 +28,6 @@ void BinarySearchTree::insert(string name, double longitude, double latitude)
 	else
 	{
 		root = temp;
-		//root->city = input;
-		//root->left = NULL;
-		//root->right = NULL;
 	}
 }
 
@@ -67,6 +62,7 @@ void BinarySearchTree::insert(Node * toAdd, Node * addHere)
 }
 
 
+
 //public and private display functions
 void BinarySearchTree::display()
 {
@@ -85,6 +81,42 @@ void BinarySearchTree::display()
 		}
 	}
 }
+
+void BinarySearchTree::displayInDist(double maxDist, double lon, double lat)
+{
+	if (!isEmpty()) 
+	{
+		priority_queue<City> pq;
+		makeQueue(root, maxDist, lon, lat, pq);
+		displayQueue(pq);
+	}
+}
+
+void BinarySearchTree::displayQueue(priority_queue<City>& pq) 
+{
+	while (!pq.empty()) {
+		cout << pq.top();
+		pq.pop();
+	}
+}
+
+void BinarySearchTree::makeQueue(Node * passedNode, double maxDist, double lon, double lat, priority_queue<City>& pq)
+{
+	double citylon, citylat, calcDist;
+	citylon = passedNode->city.getLon();
+	citylat = passedNode->city.getLat();
+	calcDist = distanceEarth(lat, lon, citylat, citylon);
+	if (calcDist <= maxDist) {
+		pq.push(passedNode->city);
+	}
+	if (passedNode->left != NULL) {
+		makeQueue(passedNode->left, maxDist, lon, lat, pq);
+	}
+	if (passedNode->right != NULL) {
+		makeQueue(passedNode->right, maxDist, lon, lat, pq);
+	}
+}
+
 
 void BinarySearchTree::display(Node * nodeptr)
 {
@@ -157,8 +189,10 @@ Node* BinarySearchTree::largest(Node* passedNode) {
 
 
 //This function exists just to set off the recursive function without the user needing access to root
-Node * BinarySearchTree::searchName(string searchKey) {
-	return searchName(searchKey, root);
+City BinarySearchTree::searchName(string searchKey) {
+	Node* temp;
+	temp = searchName(searchKey, root);	
+	return temp->city;
 }
 
 //traverses the BTree until it finds the searchKey or not
@@ -211,6 +245,7 @@ Node * BinarySearchTree::searchCoord(int lon, int lat, Node * passedNode)
 			}
 		}
 	}
+	return;
 }
 
 int BinarySearchTree::height() {
