@@ -14,12 +14,15 @@ public:
 	void insert(string, double, double); //insert a new node -------- creates instance of city 
 
 	void delCity(string); //delete a node by city name
-	Node * replacementNode(Node * ); //travels to the right most node of a the subtree of the node to be deleted
 	Node* searchName(string); //search a city by name
 	Node* searchCoord(int, int); //search a city by GPS co-ords
 	void display(); //prints the whole tree to the console
 	void displayInDist(City, double); //displays cities within distance from city input
 private:
+
+	void delCity(string, Node *); //Private delCity, so access to root in protected
+	void deleteThis(Node *); //deletes the node and resets pointers so BST remains intact
+	Node * largest(Node * passedNode);
 	Node* searchName(string, Node*);
 	Node* searchCoord(int, int, Node*);
 	void display(Node * nodeptr); //display function for recursion

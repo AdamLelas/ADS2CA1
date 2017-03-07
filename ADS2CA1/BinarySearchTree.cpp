@@ -110,42 +110,55 @@ void BinarySearchTree::delCity(City)
 
 void BinarySearchTree::delCity(string n)
 {
-	/*Temp is a pointer to the node to be deleted*/
-	Node *temp = searchName(n);
-	Node *leaf = new Node;
-	if (temp->left == NULL && temp->right == NULL) {
-		delete(temp);
-	}
-	else
-	{
-		if (temp->right != NULL) 
-		{
-			leaf = replacementNode(temp->right);
-		}
-		else {
-			if (temp->left != NULL) {
-				leaf = replacementNode(temp->left);
-			}
-		}
+	if (!isEmpty()) {
+		delCity(n, root);
 	}
 }
 
-Node* BinarySearchTree::replacementNode(Node * passedNode) {
-	if (passedNode->isLeaf()) {
+void BinarySearchTree::delCity(string n, Node * parent)
+{
+	if(n == parent->city.getName())
+	{
+		return deleteThis(parent);
+	}
+	else if (n < parent->city.getName())
+	{
+		return deleteThis(parent->left);
+	}
+	else
+	{
+		return deleteThis(parent->right);
+	}
+	
+}
+
+void BinarySearchTree::deleteThis(Node * parent) {
+	Node *temp;
+	temp = parent;
+	if (parent->left == NULL) { //no left subtree
+		parent = parent->right;
+		delete(temp);
+	}
+	else if (parent->right == NULL) { //no right subtree
+		parent = parent->left;
+		delete(temp);
+	}
+	else // both left and right subtrees exist
+	{
+		temp = largest(parent);
+		parent->city = temp->city;
+		delCity(parent->city.getName(), temp);
+	}
+}
+
+Node* BinarySearchTree::largest(Node* passedNode) {
+	if (passedNode->right == NULL)
+	{
 		return passedNode;
 	}
 	else
 	{
-		if (passedNode->right != NULL) 
-		{
-			return replacementNode(passedNode->right);
-		}
-		else
-		{
-			if (passedNode->left != NULL) {
-				return replacementNode(passedNode->left);
-			}
-		}
+		return largest(passedNode);
 	}
 }
 
