@@ -14,8 +14,8 @@ public:
 	City(); //default constructor
 	City(string nameIn, double longitude, double latitude);
 	string getName();
-	double getLon();
-	double getLat();
+	double getLon() const;
+	double getLat() const;
 private:
 	pair<double, double> GPS;
 	string name;

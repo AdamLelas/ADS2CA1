@@ -31,12 +31,12 @@ string City::getName()
 	return name;
 }
 
-double City::getLon()
+double City::getLon() const
 {
 	return GPS.first;
 }
 
-double City::getLat()
+double City::getLat() const
 {
 	return GPS.second;
 }

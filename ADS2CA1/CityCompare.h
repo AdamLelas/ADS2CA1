@@ -4,7 +4,8 @@
 
 class CityCompare {
 public:
-	bool operator()(const City& city1, const City& city2);
+	//bool operator()(const City& city1, const City& city2, double lat, double lon);
+	bool operator()();
 };
 
 
