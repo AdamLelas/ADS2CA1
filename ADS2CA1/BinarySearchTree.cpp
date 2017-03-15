@@ -14,10 +14,10 @@ bool BinarySearchTree::isEmpty()
 		return false;
 }
 
-void BinarySearchTree::insert(string name, double longitude, double latitude)
+void BinarySearchTree::insert(string name, double latitude, double longitude)
 {
 	Node *temp = new Node;
-	temp->city = City(name, longitude, latitude);
+	temp->city = City(name, latitude, longitude);
 	temp->left = NULL;
 	temp->right = NULL;
 	if (!isEmpty())
@@ -89,17 +89,18 @@ void BinarySearchTree::displayInDist(double maxDist, City cityin) //takes a maxi
 {
 	if (!isEmpty()) 
 	{
-		priority_queue< pair<string, double>, vector<pair<string, double>>, DoublePriority> pq;
-		dispDaTing(pq);
+		priority_queue< pair<string, double>, vector<pair<string, double>>, DoublePriority> pq;		
 		makeQueue(root, maxDist, cityin, pq);	
+		dispDaTing(pq);
 	}
 }
 
 void BinarySearchTree::dispDaTing(priority_queue< pair<string, double>, vector<pair<string, double>>, DoublePriority> pq) const
 {
+	pq.pop(); // pops first city off the list
 	while (!pq.empty())
 	{
-		cout << pq.top().first << ": " << pq.top().second;
+		cout << pq.top().first << ": " << pq.top().second << " km" <<endl;
 		pq.pop();
 	}
 }
@@ -109,7 +110,7 @@ void BinarySearchTree::makeQueue(Node * passedNode, double maxDist, City cityin,
 	citylon = passedNode->city.getLon();
 	citylat = passedNode->city.getLat();
 
-	calcDist = distanceEarth(cityin.getLat(), cityin.getLon(), citylat, citylon);
+	calcDist = distanceEarth(citylat, citylon, cityin.getLat(), cityin.getLon());
 	if (calcDist <= maxDist) 
 	{
 		pq.push(make_pair(passedNode->city.getName(),calcDist));
@@ -294,7 +295,7 @@ int BinarySearchTree::getHeight(Node* passedNode)
 {
 	if (passedNode == NULL)
 	{
-		return 0;
+		return -1;
 	}
 	else
 	{
