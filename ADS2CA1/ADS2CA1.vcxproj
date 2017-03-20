@@ -112,7 +112,6 @@
   <ItemGroup>
     <ClCompile Include="BinarySearchTree.cpp" />
     <ClCompile Include="City.cpp" />
-    <ClCompile Include="CityCompare.cpp" />
     <ClCompile Include="DistanceCalc.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -120,7 +119,6 @@
   <ItemGroup>
     <ClInclude Include="BinarySearchTree.h" />
     <ClInclude Include="City.h" />
-    <ClInclude Include="CityCompare.h" />
     <ClInclude Include="DistanceCalc.h" />
     <ClInclude Include="Node.h" />
   </ItemGroup>

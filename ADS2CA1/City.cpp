@@ -18,12 +18,12 @@ City::City()
 	GPS.second = 0;
 }
 
-City::City(string nameIn, double longitude, double latitude)
+City::City(string nameIn, double latitude, double longitude)
 {
 	//GPS = make_pair(longitude, latitude);
 	name = nameIn;
-	GPS.first = longitude;
-	GPS.second = latitude;
+	GPS.first = latitude;
+	GPS.second = longitude;
 }
 
 string City::getName()
@@ -33,12 +33,12 @@ string City::getName()
 
 double City::getLon() const
 {
-	return GPS.first;
+	return GPS.second;
 }
 
 double City::getLat() const
 {
-	return GPS.second;
+	return GPS.first;
 }
 
 
