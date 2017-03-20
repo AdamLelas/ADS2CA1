@@ -51,7 +51,7 @@ private:
 	void makeQueue(Node* passedNode, double maxDist, City cityin, priority_queue< pair<string, double>, vector<pair<string, double>>, DoublePriority>& pq); //makes the priority queue for displayInDist
 	void display(Node * passedNode); //display function for recursion
 	void insert(Node *toAdd, Node *addHere); //insert function for recursion
-	void dispDaTing(priority_queue< pair<string, double>, vector<pair<string, double>>, DoublePriority> pq) const;
+	void showIt(priority_queue< pair<string, double>, vector<pair<string, double>>, DoublePriority> pq) const;
 
 	
 	//variables

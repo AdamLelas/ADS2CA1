@@ -91,11 +91,11 @@ void BinarySearchTree::displayInDist(double maxDist, City cityin) //takes a maxi
 	{
 		priority_queue< pair<string, double>, vector<pair<string, double>>, DoublePriority> pq;		
 		makeQueue(root, maxDist, cityin, pq);	
-		dispDaTing(pq);
+		showIt(pq);
 	}
 }
 
-void BinarySearchTree::dispDaTing(priority_queue< pair<string, double>, vector<pair<string, double>>, DoublePriority> pq) const
+void BinarySearchTree::showIt(priority_queue< pair<string, double>, vector<pair<string, double>>, DoublePriority> pq) const
 {
 	pq.pop(); // pops first city off the list
 	while (!pq.empty())
