@@ -7,6 +7,12 @@
 #include"DistanceCalc.h"
 using namespace std;
 
+/**************************************
+*
+*	Adam Lelas
+*	X00106580
+*
+***************************************/
 
 class City {
 public:

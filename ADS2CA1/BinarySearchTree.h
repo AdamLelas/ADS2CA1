@@ -7,6 +7,13 @@
 #include"City.h"
 using namespace std;
 
+/**************************************
+*
+*	Adam Lelas
+*	X00106580
+*
+***************************************/
+
 struct DoublePriority
 {
 	bool operator() (const pair<string, double> &lhs, const pair<string, double> &rhs) const {

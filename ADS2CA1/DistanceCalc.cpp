@@ -1,5 +1,12 @@
 #include "DistanceCalc.h"
 
+/**************************************
+*
+*	Adam Lelas
+*	X00106580
+*
+***************************************/
+
 double deg2rad(double deg)
 {
 	return (deg * pi / 180);

@@ -1,5 +1,12 @@
 #include "BinarySearchTree.h"
 
+/**************************************
+*
+*	Adam Lelas
+*	X00106580
+*
+***************************************/
+
 /*CONSTRUCTOR*/
 BinarySearchTree::BinarySearchTree()
 {

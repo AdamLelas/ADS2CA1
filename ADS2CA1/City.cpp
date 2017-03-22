@@ -1,5 +1,12 @@
 #include "City.h"
 
+/**************************************
+*
+*	Adam Lelas
+*	X00106580
+*
+***************************************/
+
 ostream& operator<<(ostream& out, const City& c)
 {
 	out << setw(10) << c.name << setw(10) << c.GPS.first << setw(10) << c.GPS.second;

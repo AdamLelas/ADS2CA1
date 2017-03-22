@@ -2,9 +2,16 @@
 *    Title: Calculating the distance between 2 latitudes and longitudes that are saved in a text file?
 *    Author: Stackoverflow users: MrTJ and Edward
 *    Date accessed: 04/03/2017
-*    Availability: http://stackoverflow.com/questions/10198985/calculating-the-distance-between-2-latitudes-and-longitudes-that-are-saved-in-a
-*
+*    Availability: http://stackoverflow.com/questions/10198985/calculating-the-distance-between-2-latitudes-and-longitudes-that-are-saved-in-a*
 ***************************************************************************************/
+
+/**************************************
+*	
+*	Adam Lelas
+*	X00106580
+*
+***************************************/
+
 #ifndef DISTANCE_CALC
 #define DISTANCE_CALC
 
