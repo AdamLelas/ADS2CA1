@@ -1,9 +1,8 @@
 #ifndef BINARY_SEARCH_TREE_H
 #define BINARY_SEARCH_TREE_H
-
-#include<iostream> //cout
-// #include<cmath> //
-#include<queue> //priority queue
+#include<iostream>
+#include<queue>
+#include<iomanip>
 #include"Node.h"
 #include"City.h"
 using namespace std;
@@ -27,22 +26,26 @@ public:
 	bool isEmpty();
 	void insert(string name, double lon, double lat); //insert a new node -------- creates instance of city 
 	void delCity(string); //delete a node by city name
+	City searchName(string); //search a city by name and returns a city
 
-	City searchName(string); //search a city by name
+	bool boolSearchName(string searchKey); //returns true if name found otherwise false
 	Node* searchCoord(int lon, int lat); //search a city by GPS co-ords
 
-	void display(); //prints the whole tree to the console
-	void displayInDist(double maxDist, City cityin); //displays cities within distance from co-ordinates provided within a maximum distance
+	void displayInOrder(); //prints the whole tree to the console
+	void displayInDist(double maxDist, string cityin); //displays cities within distance from co-ordinates provided within a maximum distance
 
 	int height(); //returns the height of the tree	
 
 private:
 	int getHeight(Node * passedNode);
-	void delCity(string, Node *&); //Private delCity, so access to root in protected
-
+	void delCity(string, Node *&); //Private delCity, so access to root is protected
 	void makeDeletion(Node *& nodeptr);
-
 	Node * largest(Node * passedNode);
+
+
+	bool boolSearchName(string searchKey, Node * passedNode);
+
+	
 
 
 	Node* searchName(string, Node*);

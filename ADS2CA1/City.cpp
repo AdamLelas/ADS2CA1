@@ -2,7 +2,7 @@
 
 ostream& operator<<(ostream& out, const City& c)
 {
-	out << c.name << "\t" << c.GPS.first << "," << c.GPS.second;
+	out << setw(10) << c.name << setw(10) << c.GPS.first << setw(10) << c.GPS.second;
 	return out;
 }
 
@@ -13,7 +13,7 @@ bool City::operator<(const City & city2) const
 
 City::City()
 {
-	name = "";
+	name = "EmptyCity";
 	GPS.first = 0;
 	GPS.second = 0;
 }

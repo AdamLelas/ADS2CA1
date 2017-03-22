@@ -17,13 +17,20 @@ bool BinarySearchTree::isEmpty()
 void BinarySearchTree::insert(string name, double latitude, double longitude)
 {
 	Node *temp = new Node;
+	transform(name.begin(), name.end(), name.begin(), toupper);
 	temp->city = City(name, latitude, longitude);
 	temp->left = NULL;
 	temp->right = NULL;
 	if (!isEmpty())
 	{
 		//calls private insert function
-		insert(temp, root);
+		if (!boolSearchName(name)) {
+			insert(temp, root);
+		}
+		else
+		{
+			cout << name << " already exists";
+		}
 	}
 	else
 	{
@@ -64,34 +71,36 @@ void BinarySearchTree::insert(Node * toAdd, Node * addHere)
 }
 
 //public and private display functions
-void BinarySearchTree::display()
+void BinarySearchTree::displayInOrder()
 {
 	if (isEmpty())
 	{
-		cout << "BTree is empty";
+		cout << "BSTree is empty";
 	}
 	else {
-		cout << root->city;
-		if (root->left != NULL)
-		{
-			cout << "Left" << endl;
-			display(root->left);
-		}
-		if (root->right != NULL)
-		{
-			cout << "right" << endl;
-			display(root->right);
-		}
+		
+		cout << setw(10) << "City" << setw(10) << "Latitude" << setw(12) << "Longitude" << endl << "===================================" << endl;
+		display(root);
 	}
 }
 
-void BinarySearchTree::displayInDist(double maxDist, City cityin) //takes a maximum range in kilometers and a city and outputs cities in order of closest to furthest within that range
+//takes a maximum range in kilometers and a city and outputs cities in order of closest to furthest within that range
+void BinarySearchTree::displayInDist(double maxDist, string cityin)
 {
-	if (!isEmpty()) 
-	{
-		priority_queue< pair<string, double>, vector<pair<string, double>>, DoublePriority> pq;		
-		makeQueue(root, maxDist, cityin, pq);	
-		showIt(pq);
+	if (!isEmpty())
+	{		
+		transform(cityin.begin(), cityin.end(), cityin.begin(), toupper);
+		if (boolSearchName(cityin)) {
+			City c1 = searchName(cityin);
+			priority_queue<pair<string, double>, vector<pair<string, double>>, DoublePriority> pq;
+			makeQueue(root, maxDist, c1, pq);
+			showIt(pq);
+		}
+		else
+		{
+			cout << cityin << " not found in tree" <<  endl;
+		}
+
 	}
 }
 
@@ -100,9 +109,10 @@ void BinarySearchTree::showIt(priority_queue< pair<string, double>, vector<pair<
 	pq.pop(); // pops first city off the list
 	while (!pq.empty())
 	{
-		cout << pq.top().first << ": " << pq.top().second << " km" <<endl;
+		cout << setw(10) << pq.top().first << ": " << setw(10)<<  pq.top().second << "km" << endl;
 		pq.pop();
 	}
+	cout << endl;
 }
 
 void BinarySearchTree::makeQueue(Node * passedNode, double maxDist, City cityin, priority_queue< pair<string, double>, vector<pair<string, double>>, DoublePriority>& pq) {
@@ -111,15 +121,15 @@ void BinarySearchTree::makeQueue(Node * passedNode, double maxDist, City cityin,
 	citylat = passedNode->city.getLat();
 
 	calcDist = distanceEarth(citylat, citylon, cityin.getLat(), cityin.getLon());
-	if (calcDist <= maxDist) 
+	if (calcDist <= maxDist)
 	{
-		pq.push(make_pair(passedNode->city.getName(),calcDist));
+		pq.push(make_pair(passedNode->city.getName(), calcDist));
 	}
-	if (passedNode->left != NULL) 
+	if (passedNode->left != NULL)
 	{
 		makeQueue(passedNode->left, maxDist, cityin, pq);
 	}
-	if (passedNode->right != NULL) 
+	if (passedNode->right != NULL)
 	{
 		makeQueue(passedNode->right, maxDist, cityin, pq);
 	}
@@ -128,25 +138,24 @@ void BinarySearchTree::makeQueue(Node * passedNode, double maxDist, City cityin,
 
 void BinarySearchTree::display(Node * nodeptr)
 {
-	cout << nodeptr->city;
-	if (nodeptr->left != NULL) 
+	if (nodeptr->left != NULL)
 	{
-		cout << "Left" << endl;
 		display(nodeptr->left);
 	}
+	cout << nodeptr->city << endl;
 	if (nodeptr->right != NULL)
 	{
-		cout << "right" << endl;
 		display(nodeptr->right);
 	}
 }
 
 
-void BinarySearchTree::delCity(string n)
+void BinarySearchTree::delCity(string name)
 {
 	if (!isEmpty())
 	{
-		delCity(n, root);
+		transform(name.begin(), name.end(), name.begin(), toupper);
+		delCity(name, root);
 	}
 }
 
@@ -154,7 +163,7 @@ void BinarySearchTree::delCity(string n, Node *& parent)
 {
 	if (n < parent->city.getName())
 	{
-		if (parent->left != NULL) 
+		if (parent->left != NULL)
 		{
 			delCity(n, parent->left);
 		}
@@ -163,9 +172,9 @@ void BinarySearchTree::delCity(string n, Node *& parent)
 			cout << n << " not in tree" << endl;
 		}
 	}
-	else if (n > parent->city.getName()) 
+	else if (n > parent->city.getName())
 	{
-		if (parent->right != NULL) 
+		if (parent->right != NULL)
 		{
 			delCity(n, parent->right);
 		}
@@ -174,7 +183,7 @@ void BinarySearchTree::delCity(string n, Node *& parent)
 			cout << n << " not in tree" << endl;
 		}
 	}
-	else 
+	else
 	{
 		makeDeletion(parent);
 	}
@@ -184,27 +193,33 @@ void BinarySearchTree::delCity(string n, Node *& parent)
 void BinarySearchTree::makeDeletion(Node *&nodeptr)
 {
 	Node *temp = new Node();
-	if (nodeptr->right == NULL)  //left subtrees only
-	{ 
-		temp = nodeptr;
-		nodeptr = nodeptr->left;
-		delete temp;
-	}
-	else if (nodeptr->left == NULL) //right subtrees only
-	{ 
-		temp = nodeptr;
-		nodeptr = nodeptr->right;
-		delete temp;
-	}
-	else //both subtrees
-	{ 
+	if (nodeptr->right != NULL && nodeptr->left != NULL)
+	{
 		Node* largestValue = largest(nodeptr->left);
-		delCity(largestValue->city.getName(), nodeptr );
+		string largestcityname = largestValue->city.getName();
 		nodeptr->city = largestValue->city;
+		delCity(largestcityname, nodeptr->left);
+
+	}
+	else
+	{
+		if (nodeptr->right == NULL && nodeptr->left != NULL)  //left subtrees only
+		{
+			temp = nodeptr;
+			nodeptr = nodeptr->left;
+			delete temp;
+		}
+		else //right subtrees only
+		{
+			temp = nodeptr;
+			nodeptr = nodeptr->right;
+			delete temp;
+		}
 	}
 }
 
-Node* BinarySearchTree::largest(Node* passedNode) 
+
+Node* BinarySearchTree::largest(Node* passedNode)
 {
 	if (passedNode->right == NULL)
 	{
@@ -212,7 +227,7 @@ Node* BinarySearchTree::largest(Node* passedNode)
 	}
 	else
 	{
-		return largest(passedNode);
+		return largest(passedNode->right);
 	}
 }
 
@@ -220,9 +235,43 @@ Node* BinarySearchTree::largest(Node* passedNode)
 //This function exists just to set off the recursive function without the user needing access to root
 City BinarySearchTree::searchName(string searchKey)
 {
-	Node* temp;
-	temp = searchName(searchKey, root);	
-	return temp->city;
+	Node* temp = new Node();
+	transform(searchKey.begin(), searchKey.end(), searchKey.begin(), toupper);
+	temp = searchName(searchKey, root);
+	if (temp != NULL) {		
+			return temp->city;
+	}
+	else {
+		cout << searchKey << " not found in tree.";
+	}
+
+}
+
+bool BinarySearchTree::boolSearchName(string searchKey) {
+	transform(searchKey.begin(), searchKey.end(), searchKey.begin(), toupper);
+	return boolSearchName(searchKey, root);
+}
+
+bool BinarySearchTree::boolSearchName(string searchKey, Node* passedNode) {
+	if (passedNode != NULL)
+	{
+		if (searchKey == passedNode->city.getName())
+		{
+			return true;
+		}
+		if (searchKey < passedNode->city.getName())
+		{
+			return boolSearchName(searchKey, passedNode->left);
+		}
+		else
+		{
+			return boolSearchName(searchKey, passedNode->right);
+		}
+	}
+	else
+	{
+		return false;
+	}
 }
 
 //traverses the BTree until it finds the searchKey or not
@@ -260,7 +309,7 @@ Node * BinarySearchTree::searchCoord(int lon, int lat, Node * passedNode)
 {
 	if (passedNode != NULL)
 	{
-		if ((passedNode->city.getLon() == lon) && passedNode->city.getLat() == lat)
+		if ((passedNode->city.getLon() == lon) && (passedNode->city.getLat() == lat))
 		{
 			return passedNode;
 		}
@@ -302,11 +351,11 @@ int BinarySearchTree::getHeight(Node* passedNode)
 		int left = getHeight(passedNode->left);
 		int right = getHeight(passedNode->right);
 
-		if (left > right) 
+		if (left > right)
 		{
 			return 1 + left;
 		}
-		else 
+		else
 		{
 			return 1 + right;
 		}

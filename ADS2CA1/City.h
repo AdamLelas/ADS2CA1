@@ -3,6 +3,7 @@
 
 #include<string>
 #include<ostream>
+#include<iomanip>
 #include"DistanceCalc.h"
 using namespace std;
 
