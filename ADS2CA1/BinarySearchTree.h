@@ -24,34 +24,40 @@ class BinarySearchTree {
 public:
 	BinarySearchTree(); //default constructor 
 	bool isEmpty();
-	void insert(string name, double lon, double lat); //insert a new node -------- creates instance of city 
-	void delCity(string); //delete a node by city name
+	void insert(string name, double lat, double lon); //insert a new node -------- creates instance of city 
+	bool delCity(string); //delete a node by city name
 	City searchName(string); //search a city by name and returns a city
 
 	bool boolSearchName(string searchKey); //returns true if name found otherwise false
-	Node* searchCoord(int lon, int lat); //search a city by GPS co-ords
+	City searchCoord(double lat, double lon); //search a city by GPS co-ords
+	bool boolSearchCoord(double lat, double lon);
+
 
 	void displayInOrder(); //prints the whole tree to the console
+	void displayPostOrder();
+	void displayPreOrder();
 	void displayInDist(double maxDist, string cityin); //displays cities within distance from co-ordinates provided within a maximum distance
 
 	int height(); //returns the height of the tree	
 
 private:
 	int getHeight(Node * passedNode);
-	void delCity(string, Node *&); //Private delCity, so access to root is protected
+	bool delCity(string, Node *&); //Private delCity, so access to root is protected
 	void makeDeletion(Node *& nodeptr);
 	Node * largest(Node * passedNode);
 
-
+	Node* searchName(string, Node*);
 	bool boolSearchName(string searchKey, Node * passedNode);
 
-	
+	Node* searchCoord(double, double, Node*);	
+	bool boolSearchCoord(double lat, double lon, Node * passedNode);
 
 
-	Node* searchName(string, Node*);
-	Node* searchCoord(int, int, Node*);	
-
-	void makeQueue(Node* passedNode, double maxDist, City cityin, priority_queue< pair<string, double>, vector<pair<string, double>>, DoublePriority>& pq); //makes the priority queue for displayInDist
+	void makeQueue(Node* passedNode, double maxDist, City cityin, priority_queue< pair<string, double>, vector<pair<string, double>>, DoublePriority>& pq);
+	void displayInOrder(Node * nodeptr);
+	//makes the priority queue for displayInDist
+	void displayPostOrder(Node * nodeptr);
+	void displayPreOrder(Node * nodeptr);
 	void display(Node * passedNode); //display function for recursion
 	void insert(Node *toAdd, Node *addHere); //insert function for recursion
 	void showIt(priority_queue< pair<string, double>, vector<pair<string, double>>, DoublePriority> pq) const;
