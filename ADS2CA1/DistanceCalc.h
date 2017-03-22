@@ -1,3 +1,10 @@
+/***************************************************************************************
+*    Title: Calculating the distance between 2 latitudes and longitudes that are saved in a text file?
+*    Author: Stackoverflow users: MrTJ and Edward
+*    Date accessed: 04/03/2017
+*    Availability: http://stackoverflow.com/questions/10198985/calculating-the-distance-between-2-latitudes-and-longitudes-that-are-saved-in-a
+*
+***************************************************************************************/
 #ifndef DISTANCE_CALC
 #define DISTANCE_CALC
 
@@ -24,7 +31,3 @@ double distanceEarth(double lat1d, double lon1d, double lat2d, double lon2d);
 
 #endif // !DISTANCE_CALC
 
-/**
-* TAKEN FROM
-* http://stackoverflow.com/questions/10198985/calculating-the-distance-between-2-latitudes-and-longitudes-that-are-saved-in-a
-*/

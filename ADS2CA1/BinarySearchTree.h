@@ -2,7 +2,7 @@
 #define BINARY_SEARCH_TREE_H
 #include<iostream>
 #include<queue>
-#include<iomanip>
+#include<iomanip> //setw()
 #include"Node.h"
 #include"City.h"
 using namespace std;
@@ -55,10 +55,10 @@ private:
 
 	void makeQueue(Node* passedNode, double maxDist, City cityin, priority_queue< pair<string, double>, vector<pair<string, double>>, DoublePriority>& pq);
 	void displayInOrder(Node * nodeptr);
-	//makes the priority queue for displayInDist
+
+	
 	void displayPostOrder(Node * nodeptr);
 	void displayPreOrder(Node * nodeptr);
-	void display(Node * passedNode); //display function for recursion
 	void insert(Node *toAdd, Node *addHere); //insert function for recursion
 	void showIt(priority_queue< pair<string, double>, vector<pair<string, double>>, DoublePriority> pq) const;
 

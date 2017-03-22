@@ -114,8 +114,10 @@ void BinarySearchTree::displayPreOrder()
 
 
 /**
-*takes a maximum range in kilometers and a city name and outputs cities 
-*in order of closest to furthest within that range
+* takes a maximum range in kilometers and a city name and outputs cities 
+* in order of closest to furthest within that range
+* 
+* Based on: code example done during lab time by lecturer James Doody ITT
 */
 void BinarySearchTree::displayInDist(double maxDist, string cityin)
 {
